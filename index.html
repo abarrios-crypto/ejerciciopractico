@@ -1,42 +1,158 @@
-<div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f8f9fa; padding: 20px; border-radius: 12px; color: #333; line-height: 1.6;">
-  <h1 style="color: #2c3e50; text-align: center;">🔍 Caso Clínico: "El tumor que no respondía"</h1>
-  <p><strong>Contexto real:</strong> Inspirado en casos de oncología de precisión del proyecto The Cancer Genome Atlas (TCGA).</p>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Caso Clínico: Ciencia y Precisión</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f8f9fa;
+      color: #333;
+      line-height: 1.6;
+      padding: 20px;
+      margin: 0;
+    }
+    .container {
+      max-width: 900px;
+      margin: auto;
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+      text-align: center;
+      color: #2c3e50;
+      margin-bottom: 20px;
+    }
+    h2 {
+      color: #2980b9;
+      border-bottom: 2px solid #3498db;
+      padding-bottom: 5px;
+      margin-top: 25px;
+    }
+    p {
+      margin: 12px 0;
+    }
+    .highlight {
+      background: #e3f2fd;
+      padding: 15px;
+      border-left: 4px solid #2196f3;
+      border-radius: 8px;
+      margin: 15px 0;
+    }
+    textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      resize: vertical;
+      min-height: 80px;
+      font-size: 15px;
+      margin: 8px 0;
+    }
+    .print-btn {
+      display: block;
+      width: 100%;
+      padding: 14px;
+      background-color: #2980b9;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 17px;
+      font-weight: bold;
+      cursor: pointer;
+      margin: 30px 0;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    .print-btn:hover {
+      background-color: #1f6aad;
+    }
+    .footer {
+      text-align: center;
+      margin-top: 40px;
+      color: #7f8c8d;
+      font-size: 13px;
+    }
 
-  <h2>📌 Caso clínico</h2>
-  <p>
-    <strong>Paciente:</strong> María, 42 años, diagnosticada con cáncer de pulmón no microcítico (CPNM).<br>
-    <strong>Tratamiento inicial:</strong> Quimioterapia estándar (cisplatino + pemetrexed).<br>
-    <strong>Resultado:</strong> Progresión del tumor a las 4 semanas. No responde al tratamiento convencional.
-  </p>
+    /* Estilos para impresión */
+    @media print {
+      .print-btn {
+        display: none;
+      }
+      .footer {
+        display: none;
+      }
+      .container {
+        box-shadow: none;
+        padding: 10px;
+      }
+      body {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container" id="print-area">
+    <h1>🔍 Caso Clínico: "El tumor que no respondía"</h1>
+    <p><strong>Contexto real:</strong> Inspirado en casos de oncología de precisión del proyecto The Cancer Genome Atlas (TCGA).</p>
 
-  <p>
-    <strong>Análisis genómico del tumor:</strong><br>
-    - Mutación en el gen <strong>EGFR L858R</strong> (activadora).<br>
-    - Ausencia de fusión <em>ALK</em> o <em>ROS1</em>.<br>
-    - Bajo índice de mutación tumoral (TMB bajo).<br>
-    - <strong>PD-L1 negativo</strong> (inmunoterapia no recomendada).
-  </p>
+    <h2>📌 Caso clínico</h2>
+    <p>
+      <strong>Paciente:</strong> María, 42 años, diagnosticada con cáncer de pulmón no microcítico (CPNM).
+    </p>
+    <p>
+      <strong>Tratamiento inicial:</strong> Quimioterapia estándar (cisplatino + pemetrexed).
+    </p>
+    <p>
+      <strong>Resultado:</strong> Progresión del tumor a las 4 semanas. No responde al tratamiento convencional.
+    </p>
 
-  <div style="background: #e3f2fd; padding: 15px; border-left: 4px solid #2196f3; margin: 15px 0; border-radius: 8px;">
-    <h3>🎯 Tu misión: Decide el siguiente paso</h3>
-    <p><strong>1.</strong> Según la <strong>medicina basada en evidencias</strong>, ¿qué tipo de prueba respalda el uso de inhibidores de EGFR en pacientes con esta mutación?</p>
-    <textarea style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; margin-top: 5px;" rows="3" placeholder="Responde aquí..."></textarea>
+    <p>
+      <strong>Análisis genómico del tumor:</strong>
+    </p>
+    <ul>
+      <li>Mutación en el gen <strong>EGFR L858R</strong> (activadora).</li>
+      <li>Ausencia de fusión <em>ALK</em> o <em>ROS1</em>.</li>
+      <li>Bajo índice de mutación tumoral (TMB bajo).</li>
+      <li><strong>PD-L1 negativo</strong> (inmunoterapia no recomendada).</li>
+    </ul>
 
-    <p style="margin-top: 15px;"><strong>2.</strong> ¿Por qué la <strong>medicina de precisión</strong> indica que María debería recibir un inhibidor de EGFR (como gefitinib o osimertinib) en lugar de continuar con quimioterapia?</p>
-    <textarea style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; margin-top: 5px;" rows="3" placeholder="Responde aquí..."></textarea>
+    <div class="highlight">
+      <h3>🎯 Tu misión: Decide el siguiente paso</h3>
+      
+      <p><strong>1.</strong> Según la <strong>medicina basada en evidencias</strong>, ¿qué tipo de prueba respalda el uso de inhibidores de EGFR en pacientes con esta mutación?</p>
+      <textarea placeholder="Escribe tu respuesta aquí..."></textarea>
 
-    <p style="margin-top: 15px;"><strong>3.</strong> Si no se hubiera hecho el análisis genómico, ¿qué riesgo habría al mantener la quimioterapia?</p>
-    <textarea style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; margin-top: 5px;" rows="3" placeholder="Responde aquí..."></textarea>
+      <p><strong>2.</strong> ¿Por qué la <strong>medicina de precisión</strong> indica que María debería recibir un inhibidor de EGFR (como gefitinib u osimertinib) en lugar de continuar con quimioterapia?</p>
+      <textarea placeholder="Escribe tu respuesta aquí..."></textarea>
+
+      <p><strong>3.</strong> Si no se hubiera hecho el análisis genómico, ¿qué riesgo habría al mantener la quimioterapia?</p>
+      <textarea placeholder="Escribe tu respuesta aquí..."></textarea>
+    </div>
+
+    <h2>💡 Clave de aprendizaje</h2>
+    <ul>
+      <li>✅ <strong>Medicina Basada en Evidencias (MBE):</strong> Ensayos clínicos tipo I demostraron que los inhibidores de EGFR mejoran la supervivencia progresión-libre en pacientes con mutación <em>EGFR</em>.</li>
+      <li>✅ <strong>Medicina de Precisión:</strong> El tratamiento se adapta al perfil molecular del tumor, no al tipo de cáncer en general.</li>
+      <li>✅ <strong>Impacto real:</strong> Este enfoque ha aumentado significativamente la supervivencia en subgrupos de pacientes con CPNM.</li>
+    </ul>
+
+    <p style="font-style: italic; text-align: center; margin-top: 25px; color: #555;">
+      🧠 "La ciencia nos guía, la precisión nos transforma. Hoy tú decidiste con datos, no con suposiciones."
+    </p>
+
+    <!-- Botón de imprimir -->
+    <button class="print-btn" onclick="window.print()">
+      🖨️ Imprimir respuestas y caso clínico
+    </button>
   </div>
 
-  <h2>💡 Clave de aprendizaje</h2>
-  <ul>
-    <li>✅ <strong>MBE:</strong> Ensayos clínicos tipo I (aleatorizados) demostraron que los inhibidores de EGFR mejoran supervivencia en pacientes con mutación <em>EGFR</em>.</li>
-    <li>✅ <strong>Precisión:</strong> El tratamiento se adapta al perfil genético del tumor, no al tipo de cáncer genérico.</li>
-    <li>✅ <strong>Impacto real:</strong> Este enfoque ha aumentado la supervivencia en subgrupos de pacientes con CPNM hasta en un 50%.</li>
-  </ul>
-
-  <p style="text-align: center; margin-top: 25px; font-style: italic; color: #555;">
-    🧠 "La ciencia nos guía, la precisión nos transforma. Hoy tú decidiste con datos, no con suposiciones."
-  </p>
-</div>
+  <div class="footer">
+    Ejercicio interactivo – Biomedicina con enfoque en evidencia y precisión
+  </div>
+</body>
+</html>
