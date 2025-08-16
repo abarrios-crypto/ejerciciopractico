@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Cuestionario: Ciencia y Precisión</title>
+  <title>Ejercicio: Medicina Basada en Evidencia y Precisión</title>
   <style>
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -28,62 +27,87 @@
       margin-bottom: 20px;
     }
     h2 {
-      color: #3498db;
+      color: #2980b9;
       border-bottom: 2px solid #3498db;
       padding-bottom: 5px;
       margin-top: 25px;
     }
-    .verse {
-      background-color: #f1f8ff;
+    .info-group {
+      background: #f0f7ff;
       padding: 15px;
-      border-left: 4px solid #3498db;
-      margin-bottom: 20px;
       border-radius: 8px;
+      border: 1px solid #b3d9ff;
+      margin-bottom: 20px;
     }
-    .question {
-      margin: 15px 0;
-    }
-    .question p {
+    .info-group label {
+      display: block;
+      margin: 10px 0 5px;
       font-weight: 600;
-      margin-bottom: 8px;
       color: #2c3e50;
     }
-    textarea {
+    .info-group input {
       width: 100%;
       padding: 10px;
       border: 1px solid #ccc;
       border-radius: 6px;
-      resize: vertical;
-      min-height: 80px;
-      font-size: 14px;
+      font-size: 15px;
     }
-    .participants {
-      margin: 25px 0;
+    .question {
+      margin: 20px 0;
     }
-    .participants button {
-      margin-top: 10px;
-      padding: 8px 12px;
-      background-color: #27ae60;
-      color: white;
+    .question p {
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+    .options {
+      list-style: none;
+      padding: 0;
+    }
+    .options li {
+      margin: 8px 0;
+    }
+    .options input {
+      margin-right: 8px;
+    }
+    .feedback {
+      margin-top: 15px;
+      padding: 10px;
+      border-radius: 6px;
+      display: none;
+    }
+    .correct {
+      background-color: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+    }
+    .incorrect {
+      background-color: #f8d7da;
+      color: #721c24;
+      border: 1px solid #f5c6c9;
+    }
+    .btn {
+      display: inline-block;
+      padding: 10px 20px;
+      margin: 10px 5px;
       border: none;
       border-radius: 6px;
       cursor: pointer;
+      font-size: 16px;
+      font-weight: bold;
     }
-    .participants button:hover {
-      background-color: #219a52;
+    .check-btn {
+      background-color: #2980b9;
+      color: white;
     }
-    .participant-input {
-      margin: 5px 0;
-      padding: 8px;
-      width: 100%;
-      border: 1px solid #ddd;
-      border-radius: 6px;
+    .reset-btn {
+      background-color: #e74c3c;
+      color: white;
     }
     .print-btn {
       display: block;
       width: 100%;
       padding: 14px;
-      background-color: #2980b9;
+      background-color: #27ae60;
       color: white;
       border: none;
       border-radius: 8px;
@@ -94,7 +118,7 @@
       box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     }
     .print-btn:hover {
-      background-color: #1f6aad;
+      background-color: #219a52;
     }
     .footer {
       text-align: center;
@@ -103,290 +127,168 @@
       font-size: 13px;
     }
 
-    /* Estilos para impresión */
+    /* Ocultar botones al imprimir */
     @media print {
-      .participants button, .print-btn {
+      .btn, .feedback::before, .feedback {
         display: none !important;
+      }
+      .footer {
+        display: none;
       }
       .container {
         box-shadow: none;
         padding: 10px;
       }
-      body {
-        -webkit-print-color-adjust: exact;
-        print-color-adjust: exact;
-      }
     }
   </style>
 </head>
 <body>
-  <div class="container" id="print-content">
-    <h1>Cuestionario de reflexión verso a verso: "Ciencia y Precisión"</h1>
+  <div class="container" id="print-area">
+    <h1>🔍 Ejercicio: Medicina Basada en Evidencia y Precisión</h1>
 
-    <div class="participants">
-      <h2>Integrantes del equipo</h2>
-      <div id="participants-list">
-        <input type="text" class="participant-input" placeholder="Nombre del integrante 1" />
-      </div>
-      <button type="button" onclick="addParticipant()">+ Añadir más integrantes</button>
+    <!-- Nombre y grupo -->
+    <div class="info-group">
+      <label for="student-name">Nombre del estudiante</label>
+      <input type="text" id="student-name" placeholder="Escribe tu nombre completo" />
+
+      <label for="student-group">Grupo o equipo</label>
+      <input type="text" id="student-group" placeholder="Ej: Grupo 3B, Equipo Alpha" />
     </div>
 
-    <!-- [Verso 1] -->
-    <h2>[Verso 1]</h2>
-    <div class="verse">
-      <p><em>"La ciencia me habla claro, yo no me voy a inventar,"</em></p>
-      <div class="question">
-        <p>¿Qué significa que "la ciencia habla claro"?</p>
-        <textarea placeholder="Escribe tu respuesta aquí..."></textarea>
-      </div>
-      <div class="question">
-        <p>¿Por qué es importante basar el conocimiento en hechos y no en inventos o rumores?</p>
-        <textarea placeholder="Escribe tu respuesta aquí..."></textarea>
-      </div>
+    <h2>📌 Caso clínico</h2>
+    <p>
+      <strong>Paciente:</strong> Luis, 58 años, diagnosticado con cáncer de pulmón no microcítico (CPNM).<br>
+      <strong>Tratamiento inicial:</strong> Quimioterapia estándar.<br>
+      <strong>Resultado:</strong> Progresión del tumor.<br>
+      <strong>Análisis genómico:</strong> Mutación <strong>EGFR L858R</strong> positiva. PD-L1 negativo.
+    </p>
 
-      <p><em>"Evidencia en mano, pa’ la cura aplicar."</em></p>
-      <div class="question">
-        <p>¿Qué se entiende por “evidencia” en el contexto médico?</p>
-        <textarea placeholder="Escribe tu respuesta aquí..."></textarea>
-      </div>
-      <div class="question">
-        <p>¿Por qué es esencial usar evidencia para aplicar tratamientos?</p>
-        <textarea placeholder="Escribe tu respuesta aquí..."></textarea>
-      </div>
-
-      <p><em>"No es cuestión de corazonada, ni de intuición,"</em></p>
-      <div class="question">
-        <p>¿Qué diferencias hay entre un tratamiento basado en evidencia y uno basado solo en corazonadas o intuición?</p>
-        <textarea placeholder="Escribe tu respuesta aquí..."></textarea>
-      </div>
-      <div class="question">
-        <p>¿Qué problemas podrían surgir si se confiara únicamente en la intuición en medicina?</p>
-        <textarea placeholder="Escribe tu respuesta aquí..."></textarea>
-      </div>
-
-      <p><em>"Aquí hay datos duros, no solo opinión."</em></p>
-      <div class="question">
-        <p>¿Qué quiere decir “datos duros” y cómo contrastan con las opiniones?</p>
-        <textarea placeholder="Escribe tu respuesta aquí..."></textarea>
-      </div>
-      <div class="question">
-        <p>¿Por qué es fundamental tener datos objetivos en la toma de decisiones médicas?</p>
-        <textarea placeholder="Escribe tu respuesta aquí..."></textarea>
-      </div>
+    <!-- Pregunta 1 -->
+    <div class="question">
+      <p>1. Según la medicina basada en evidencias, ¿cuál es el tratamiento de primera línea recomendado para este paciente?</p>
+      <ul class="options">
+        <li><label><input type="radio" name="q1" value="incorrect"> a) Inmunoterapia con pembrolizumab</label></li>
+        <li><label><input type="radio" name="q1" value="correct"> b) Inhibidor de EGFR (osimertinib)</label></li>
+        <li><label><input type="radio" name="q1" value="incorrect"> c) Radioterapia sola</label></li>
+        <li><label><input type="radio" name="q1" value="incorrect"> d) Cambio a quimioterapia más intensa</label></li>
+      </ul>
+      <div class="feedback" id="feedback1"></div>
     </div>
 
-    <!-- [Pre-Coro] -->
-    <h2>[Pre-Coro]</h2>
-    <div class="verse">
-      <p><em>"Pero el cuerpo es un mundo, diferente cada cual,"</em></p>
-      <div class="question">
-        <p>¿Por qué se dice que cada cuerpo es un mundo diferente?</p>
-        <textarea placeholder="Escribe tu respuesta aquí..."></textarea>
-      </div>
-      <div class="question">
-        <p>¿Qué implicaciones tiene esto para el tratamiento médico?</p>
-        <textarea placeholder="Escribe tu respuesta aquí..."></textarea>
-      </div>
-
-      <p><em>"La genética manda, eso es lo real."</em></p>
-      <div class="question">
-        <p>¿Qué papel juega la genética en la medicina de precisión?</p>
-        <textarea placeholder="Escribe tu respuesta aquí..."></textarea>
-      </div>
-      <div class="question">
-        <p>¿Por qué la genética es considerada “lo real” en este contexto?</p>
-        <textarea placeholder="Escribe tu respuesta aquí..."></textarea>
-      </div>
-
-      <p><em>"Medicina que adapta, se pone a estudiar,"</em></p>
-      <div class="question">
-        <p>¿Por qué es importante que la medicina se adapte a cada paciente?</p>
-        <textarea placeholder="Escribe tu respuesta aquí..."></textarea>
-      </div>
-      <div class="question">
-        <p>¿Qué significa “ponerse a estudiar” en el ámbito de la atención médica personalizada?</p>
-        <textarea placeholder="Escribe tu respuesta aquí..."></textarea>
-      </div>
-
-      <p><em>"Pa’ cuidar a cada uno, sin generalizar."</em></p>
-      <div class="question">
-        <p>¿Qué riesgos tiene tratar a todos los pacientes exactamente igual?</p>
-        <textarea placeholder="Escribe tu respuesta aquí..."></textarea>
-      </div>
-      <div class="question">
-        <p>¿Cómo ayuda la medicina de precisión a evitar esta generalización?</p>
-        <textarea placeholder="Escribe tu respuesta aquí..."></textarea>
-      </div>
+    <!-- Pregunta 2 -->
+    <div class="question">
+      <p>2. ¿Por qué la medicina de precisión indica este tratamiento específico?</p>
+      <ul class="options">
+        <li><label><input type="radio" name="q2" value="incorrect"> a) Porque todos los cánceres de pulmón responden igual</label></li>
+        <li><label><input type="radio" name="q2" value="incorrect"> b) Porque es el tratamiento más económico</label></li>
+        <li><label><input type="radio" name="q2" value="correct"> c) Porque el tumor tiene una mutación específica que lo hace sensible a inhibidores de EGFR</label></li>
+        <li><label><input type="radio" name="q2" value="incorrect"> d) Porque el paciente lo prefiere</label></li>
+      </ul>
+      <div class="feedback" id="feedback2"></div>
     </div>
 
-    <!-- [Coro] -->
-    <h2>[Coro]</h2>
-    <div class="verse">
-      <p><em>"Ciencia y precisión, junte en la misión,"</em></p>
-      <div class="question">
-        <p>¿Por qué se sugiere que la ciencia y la precisión deben trabajar juntas?</p>
-        <textarea placeholder="Escribe tu respuesta aquí..."></textarea>
-      </div>
-      <div class="question">
-        <p>¿Cómo se complementan ambos enfoques para mejorar la salud?</p>
-        <textarea placeholder="Escribe tu respuesta aquí..."></textarea>
-      </div>
-
-      <p><em>"Pa’ salvar vidas, pa’ curar el dolor."</em></p>
-      <div class="question">
-        <p>¿Cuál es el propósito común de la medicina basada en evidencia y la medicina de precisión?</p>
-        <textarea placeholder="Escribe tu respuesta aquí..."></textarea>
-      </div>
-
-      <p><em>"Sin división, los dos en conexión,"</em></p>
-      <div class="question">
-        <p>¿Qué problemas podrían surgir si hay división o desacuerdo entre estos enfoques?</p>
-        <textarea placeholder="Escribe tu respuesta aquí..."></textarea>
-      </div>
-      <div class="question">
-        <p>¿Por qué es importante la colaboración entre ellos?</p>
-        <textarea placeholder="Escribe tu respuesta aquí..."></textarea>
-      </div>
-
-      <p><em>"Evidencia y genoma, haciendo la función."</em></p>
-      <div class="question">
-        <p>¿Qué quiere decir “haciendo la función” en este contexto?</p>
-        <textarea placeholder="Escribe tu respuesta aquí..."></textarea>
-      </div>
-      <div class="question">
-        <p>¿Cómo se integran la evidencia y el análisis genómico para tratar a los pacientes?</p>
-        <textarea placeholder="Escribe tu respuesta aquí..."></textarea>
-      </div>
+    <!-- Pregunta 3 -->
+    <div class="question">
+      <p>3. Si no se hubiera realizado el análisis genómico, ¿qué riesgo habría?</p>
+      <ul class="options">
+        <li><label><input type="radio" name="q3" value="correct"> a) Tratar con quimioterapia ineficaz, perdiendo tiempo valioso</label></li>
+        <li><label><input type="radio" name="q3" value="incorrect"> b) Que el paciente mejore más rápido</label></li>
+        <li><label><input type="radio" name="q3" value="incorrect"> c) Que el tumor desaparezca solo</label></li>
+        <li><label><input type="radio" name="q3" value="incorrect"> d) No hay riesgo, la quimioterapia siempre funciona</label></li>
+      </ul>
+      <div class="feedback" id="feedback3"></div>
     </div>
 
-    <!-- [Verso 2] -->
-    <h2>[Verso 2]</h2>
-    <div class="verse">
-      <p><em>"Ensayos clínicos firmes, con control y rigor,"</em></p>
-      <div class="question">
-        <p>¿Qué son los ensayos clínicos y por qué son esenciales en la medicina basada en evidencia?</p>
-        <textarea placeholder="Escribe tu respuesta aquí..."></textarea>
-      </div>
-      <div class="question">
-        <p>¿Qué significan “control y rigor” en este proceso?</p>
-        <textarea placeholder="Escribe tu respuesta aquí..."></textarea>
-      </div>
-
-      <p><em>"Riesgos calculados, no es cuestión de amor."</em></p>
-      <div class="question">
-        <p>¿Por qué es importante calcular riesgos en los tratamientos?</p>
-        <textarea placeholder="Escribe tu respuesta aquí..."></textarea>
-      </div>
-      <div class="question">
-        <p>¿Por qué no es suficiente el “amor” o buenas intenciones para garantizar un buen tratamiento?</p>
-        <textarea placeholder="Escribe tu respuesta aquí..."></textarea>
-      </div>
-
-      <p><em>"Pero si el ADN cuenta una historia aparte,"</em></p>
-      <div class="question">
-        <p>¿A qué se refiere que el ADN cuenta una “historia aparte”?</p>
-        <textarea placeholder="Escribe tu respuesta aquí..."></textarea>
-      </div>
-      <div class="question">
-        <p>¿Cómo influye la información genética en la personalización del tratamiento?</p>
-        <textarea placeholder="Escribe tu respuesta aquí..."></textarea>
-      </div>
-
-      <p><em>"La medicina personalizada es un arte."</em></p>
-      <div class="question">
-        <p>¿Por qué se considera la medicina personalizada un "arte"?</p>
-        <textarea placeholder="Escribe tu respuesta aquí..."></textarea>
-      </div>
-      <div class="question">
-        <p>¿Qué habilidades o conocimientos se necesitan para aplicarla con éxito?</p>
-        <textarea placeholder="Escribe tu respuesta aquí..."></textarea>
-      </div>
+    <!-- Botones de verificar y repetir -->
+    <div style="text-align: center; margin: 30px 0;">
+      <button class="btn check-btn" onclick="checkAnswers()">✅ Verificar respuestas</button>
+      <button class="btn reset-btn" onclick="resetExercise()" style="display: none;" id="reset-btn">🔄 Repetir ejercicio</button>
     </div>
 
-    <!-- [Puente] -->
-    <h2>[Puente]</h2>
-    <div class="verse">
-      <p><em>"No hay guerra aquí, no hay rivalidad,"</em></p>
-      <div class="question">
-        <p>¿Qué significa que no haya “guerra” ni “rivalidad” entre los enfoques?</p>
-        <textarea placeholder="Escribe tu respuesta aquí..."></textarea>
-      </div>
-      <div class="question">
-        <p>¿Por qué evitar rivalidades puede beneficiar al paciente?</p>
-        <textarea placeholder="Escribe tu respuesta aquí..."></textarea>
-      </div>
+    <!-- Retroalimentación general -->
+    <div id="final-feedback" style="display: none; padding: 15px; border-radius: 8px; margin: 20px 0; font-weight: bold; text-align: center;"></div>
 
-      <p><em>"Dos caminos que buscan la verdad."</em></p>
-      <div class="question">
-        <p>¿Qué “verdad” creen que buscan ambos enfoques?</p>
-        <textarea placeholder="Escribe tu respuesta aquí..."></textarea>
-      </div>
-      <div class="question">
-        <p>¿Cómo puede la pluralidad de enfoques ayudar a lograr esa verdad?</p>
-        <textarea placeholder="Escribe tu respuesta aquí..."></textarea>
-      </div>
+    <!-- Clave de aprendizaje -->
+    <h2>💡 Clave de aprendizaje</h2>
+    <ul>
+      <li>✅ <strong>MBE:</strong> Guías clínicas (como NCCN) recomiendan osimertinib como primera línea en <em>EGFR+</em>.</li>
+      <li>✅ <strong>Precisión:</strong> El tratamiento se adapta al perfil molecular del tumor.</li>
+      <li>✅ <strong>Impacto:</strong> Los pacientes con <em>EGFR+</em> tienen mayor supervivencia con inhibidores que con quimio.</li>
+    </ul>
 
-      <p><em>"El futuro es unión, eso debes entender,"</em></p>
-      <div class="question">
-        <p>¿Por qué la unión de ciencia y precisión es importante para el futuro de la medicina?</p>
-        <textarea placeholder="Escribe tu respuesta aquí..."></textarea>
-      </div>
-
-      <p><em>"Ciencia y precisión, pa’ bien defender."</em></p>
-      <div class="question">
-        <p>¿Qué quiere decir “pa’ bien defender” en este contexto?</p>
-        <textarea placeholder="Escribe tu respuesta aquí..."></textarea>
-      </div>
-      <div class="question">
-        <p>¿Cómo pueden estos enfoques defender mejor la salud de las personas?</p>
-        <textarea placeholder="Escribe tu respuesta aquí..."></textarea>
-      </div>
-    </div>
-
-    <!-- [Outro] -->
-    <h2>[Outro]</h2>
-    <div class="verse">
-      <p><em>"Yeah-yeah, medicina que avanza,"</em></p>
-      <div class="question">
-        <p>¿Qué implica que la medicina “avanza”?</p>
-        <textarea placeholder="Escribe tu respuesta aquí..."></textarea>
-      </div>
-      <div class="question">
-        <p>¿Cuál es el papel de la innovación y el conocimiento en este avance?</p>
-        <textarea placeholder="Escribe tu respuesta aquí..."></textarea>
-      </div>
-
-      <p><em>"Pa’ curar con corazón y ciencia, con esperanza."</em></p>
-      <div class="question">
-        <p>¿Cómo se combinan “corazón” y “ciencia” en una buena práctica médica?</p>
-        <textarea placeholder="Escribe tu respuesta aquí..."></textarea>
-      </div>
-      <div class="question">
-        <p>¿Por qué es importante mantener la esperanza en tratamientos médicos?</p>
-        <textarea placeholder="Escribe tu respuesta aquí..."></textarea>
-      </div>
-    </div>
+    <p style="font-style: italic; text-align: center; margin-top: 25px; color: #555;">
+      🧠 "La ciencia nos guía, la precisión nos transforma. Hoy tú decidiste con datos, no con suposiciones."
+    </p>
 
     <!-- Botón de imprimir -->
     <button class="print-btn" onclick="window.print()">
-      🖨️ Imprimir respuestas
+      🖨️ Imprimir ejercicio y respuestas
     </button>
   </div>
 
   <div class="footer">
-    Cuestionario interactivo: "Ciencia y Precisión" – Reflexión colaborativa | Patología Clínica II | M.C. Adriana Barrios
+    Ejercicio interactivo – Biomedicina con retroalimentación
   </div>
 
   <script>
-    let participantCount = 1;
-    function addParticipant() {
-      participantCount++;
-      const list = document.getElementById('participants-list');
-      const input = document.createElement('input');
-      input.type = 'text';
-      input.className = 'participant-input';
-      input.placeholder = `Nombre del integrante ${participantCount}`;
-      list.appendChild(input);
+    // Verificar respuestas
+    function checkAnswers() {
+      const questions = ['q1', 'q2', 'q3'];
+      let allCorrect = true;
+
+      questions.forEach((q, index) => {
+        const selected = document.querySelector(`input[name="${q}"]:checked`);
+        const feedback = document.getElementById(`feedback${index + 1}`);
+
+        if (!selected) {
+          feedback.textContent = "⚠️ Por favor, selecciona una opción.";
+          feedback.className = "feedback incorrect";
+          feedback.style.display = "block";
+          allCorrect = false;
+        } else {
+          if (selected.value === "correct") {
+            feedback.textContent = "✅ ¡Correcto! Este tratamiento está respaldado por ensayos clínicos y es el estándar para tumores con mutación EGFR.";
+            feedback.className = "feedback correct";
+          } else {
+            feedback.textContent = "❌ Incorrecto. Revisa la clave de aprendizaje.";
+            feedback.className = "feedback incorrect";
+            allCorrect = false;
+          }
+          feedback.style.display = "block";
+        }
+      });
+
+      // Retroalimentación final
+      const finalFeedback = document.getElementById("final-feedback");
+      if (allCorrect) {
+        finalFeedback.textContent = "🎉 ¡Excelente! Has aplicado correctamente la medicina basada en evidencia y la medicina de precisión.";
+        finalFeedback.style.backgroundColor = "#d4edda";
+        finalFeedback.style.color = "#155724";
+      } else {
+        finalFeedback.textContent = "⚠️ Algunas respuestas son incorrectas. Usa la clave de aprendizaje para repasar y pulsa 'Repetir ejercicio'.";
+        finalFeedback.style.backgroundColor = "#f8d7da";
+        finalFeedback.style.color = "#721c24";
+      }
+      finalFeedback.style.display = "block";
+
+      // Mostrar botón de reinicio
+      document.getElementById("reset-btn").style.display = "inline-block";
+    }
+
+    // Reiniciar ejercicio
+    function resetExercise() {
+      // Limpiar selecciones
+      document.querySelectorAll('input[type="radio"]').forEach(radio => {
+        radio.checked = false;
+      });
+
+      // Ocultar retroalimentación
+      document.querySelectorAll('.feedback').forEach(fb => {
+        fb.style.display = "none";
+      });
+
+      document.getElementById("final-feedback").style.display = "none";
+      document.getElementById("reset-btn").style.display = "none";
     }
   </script>
 </body>
